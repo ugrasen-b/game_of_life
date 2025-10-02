@@ -1,0 +1,44 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Oct  2 15:40:17 2025
+
+@author: Bob
+"""
+
+from __future__ import annotations
+from typing import Iterable, List, Tuple, Sequence, Optional
+import random
+
+Coord = Tuple[int, int]
+
+class Grid:
+    
+    def __init__(self, rows: int, cols: int, wrap: bool = True):
+        assert rows > 0 and cols > 0
+        self.rows = rows
+        self.cols = cols
+        self.wrap = wrap
+        self._cells: List[List[int]] = [[0] * cols for _ in range(rows)]
+        
+    def get(self, r: int, c: int) -> int:
+        return self._cells[r][c]
+    
+    def set(self, r: int, c: int, value: int = 1) -> None:
+        self._cells[r][c] = 1 if value else 0
+        
+    def toggle(self, r: int, c: int) -> None:
+        self.cells[r][c] ^= 1
+        
+    def clear(self) -> None:
+        for r in range(self.rows):
+            for c in range(self.cols):
+                self._cells[r][c] = 0
+                
+    def randomize(self, p_alive: float = 0.2, seed: Optional[int] = None) -> None:
+        if seed is not None:
+            random.seed(seed)
+        for r in range(self.rows):
+            for c in range(self.cols):
+                self._cells[r][c] = 1 if random.random() < p_alive else 0
+                
+    
