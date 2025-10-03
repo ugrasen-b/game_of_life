@@ -41,4 +41,22 @@ class Grid:
             for c in range(self.cols):
                 self._cells[r][c] = 1 if random.random() < p_alive else 0
                 
+
+    @classmethod
+    def from_coords(cls, rows: int, cols: int, coords: Iterable[Coord], wrap: bool = True) -> "Grid":
+        g = cls(rows, cols, wrap=wrap)
+        for r, c in coords:
+            if 0 <= r < rows and 0 <= c <cols:
+                g.set(r, c, 1)
+        return g
     
+    @classmethod
+    def from_strings(cls, lines: Sequence[str], wrap: bool = True) -> "Grid":
+        rows = len(lines)
+        cols = max(len(line) for line in lines)
+        g = cls(rows, cols, wrap=wrap)
+        for r, line in enumerate(lines):
+            for c, ch in enumerate(lines):
+                if ch in ("O", "X", "1"):
+                    g.set(r, c, 1)
+        return g
