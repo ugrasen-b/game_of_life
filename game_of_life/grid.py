@@ -60,3 +60,10 @@ class Grid:
                 if ch in ("O", "X", "1"):
                     g.set(r, c, 1)
         return g
+    
+    @classmethod
+    def to_string(self, alive_char: str = "O", dead_char: str = ".") -> str:
+        lines = []
+        for r in range(self.rows):
+            lines.append(''.join(alive_char if self._cells[r][c] else dead_char for c in range(self.cols)))
+        return '\n'.join(lines)
