@@ -99,5 +99,8 @@ class Grid:
                 else:
                     new[r][c] = 1 if (n ==3) else 0
         self._cells = new
+        
+    def alive_cells(self) -> List[Coord]:
+        return [(r,c) for r in range(self.rows) for c in range(self.cols) if self._cells[r][c] == 1]
     
     
