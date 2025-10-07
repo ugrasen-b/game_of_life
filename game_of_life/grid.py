@@ -88,5 +88,16 @@ class Grid:
     def alive_neighbors(self, r: int, c:int) -> int:
         return sum(self._cells[rr][cc] for rr, cc in self._neighbour_coords(r, c))
     
+    def step(self) -> None:
+        new = [[0] * self.cols for _ in range(self.rows)]
+        for r in range(self.rows):
+            for c in range(self.cols):
+                alive = self._cells[r][c] == 1
+                n = self.alive_neighbors(r, c)
+                if alive:
+                    new[r][c] = 1 if (n==2 or n==3) else 0
+                else:
+                    new[r][c] = 1 if (n ==3) else 0
+        self._cells = new
     
     
