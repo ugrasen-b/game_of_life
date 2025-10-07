@@ -85,5 +85,8 @@ class Grid:
                     if 0 <= rr < self.rows and 0 <= cc <= self.cols:
                         yield rr, cc
     
+    def alive_neighbors(self, r: int, c:int) -> int:
+        return sum(self._cells[rr][cc] for rr, cc in self._neighbour_coords(r, c))
+    
     
     
