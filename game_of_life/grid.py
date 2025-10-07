@@ -70,4 +70,20 @@ class Grid:
     def __str__(self) -> str :
         return self.to_string()
     
+    def _neighbour_coords(self, r: int, c: int) -> Iterable[Coord]:
+        for dr in (-1, 0, 1):
+            for dc in (-1, 0, 1):
+                if dr == 0 and dc == 0:
+                    continue
+                rr = r + dr
+                cc = c + dc
+                if self.wrap:
+                    rr %= self.rows
+                    cc %= self.cols
+                    yield rr,cc
+                else:
+                    if 0 <= rr < self.rows and 0 <= cc <= self.cols:
+                        yield rr, cc
+    
+    
     
